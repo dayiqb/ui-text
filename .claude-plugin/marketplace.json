@@ -1,5 +1,21 @@
 {
   "name": "ui-text",
   "owner": { "name": "dayiqb" },
-  "plugins": [{ "name": "ui-text", "source": "./" }]
+  "metadata": { "description": "UI text rules for Claude", "version": "0.1.0" },
+  "plugins": [
+    {
+      "name": "ui-text",
+      "source": "./plugins/ui-text",
+      "description": "Skill for concise, conventional UI text and the platform's standard terms, including ServiceNow fields.",
+      "version": "0.1.0",
+      "category": "design"
+    },
+    {
+      "name": "ui-text-mod",
+      "source": "./plugins/ui-text-mod",
+      "description": "Claude Code mod that blocks verbose UI labels and non-standard ServiceNow fields, and adds the rules to the system prompt.",
+      "version": "0.1.0",
+      "category": "design"
+    }
+  ]
 }

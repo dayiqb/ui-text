@@ -1,6 +1,9 @@
 # ui-text
 
-Mod for Claude Code som tvinger Claude til å skrive konsis, konvensjonell UI-tekst og bruke plattformens standardtermer.
+Markedsplass med to plugins:
+
+- **ui-text**: skill med reglene for UI-tekst. Virker i Claude-appen, Cowork og Claude Code.
+- **ui-text-mod**: mod for Claude Code som tvinger reglene gjennom.
 
 ## Hva den gjør
 
@@ -17,7 +20,8 @@ Mod for Claude Code som tvinger Claude til å skrive konsis, konvensjonell UI-te
 ## Installere
 
 ```
-/plugin install ui-text --marketplace dayiqb/ui-text
+/plugin marketplace add dayiqb/ui-text
+/plugin install ui-text-mod@ui-text
 ```
 
 Svar `y` for å legge til markedsplassen, og velg deretter scope.

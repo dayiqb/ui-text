@@ -1,0 +1,6 @@
+{
+  "name": "ui-text-mod",
+  "version": "0.1.0",
+  "description": "Blocks file writes with verbose UI labels or non-standard ServiceNow fields, and adds the UI text rules to Claude's system prompt (Claude Code only)",
+  "author": { "name": "dayiqb" }
+}
