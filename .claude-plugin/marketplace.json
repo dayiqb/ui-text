@@ -1,0 +1,5 @@
+{
+  "name": "ui-text",
+  "owner": { "name": "dayiqb" },
+  "plugins": [{ "name": "ui-text", "source": "./" }]
+}
