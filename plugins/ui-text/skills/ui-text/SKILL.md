@@ -39,6 +39,7 @@ A label is the name of a thing, not a sentence about it.
 | My open incidents list | Open incidents |
 | Manage team members | Members |
 | Your notifications center | Notifications |
+| Scheduled tasks list | Scheduled |
 
 - Navigation, tabs, page titles, section headings, column headers: a noun, 1 word where possible, 3 at most.
 - Use the names users know from other products: Home, Dashboard, Search, Inbox, Notifications, Settings, Profile, Help, Activity, History, Reports.
@@ -103,6 +104,8 @@ A label is the name of a thing, not a sentence about it.
 - If the UI is English, don't mix in Norwegian, and vice versa.
 
 ## Terminology: the platform's word wins
+
+In any domain system, the platform's standard term beats general good writing. Users, docs, reports, integrations and scripts all expect it.
 
 1. Before naming anything, check whether the platform already has a term or field for it.
 2. If it does, use it exactly: same name, same label. Don't translate, shorten, paraphrase or "improve" it.
