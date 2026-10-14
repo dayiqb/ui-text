@@ -13,7 +13,7 @@ Every label, heading, button, message, table and field you write follows these r
 - One term per concept, the same everywhere. Never vary words to avoid repetition.
 - The platform's standard term wins over your own wording. Check whether a standard term or field exists before naming anything, and use it exactly. Don't translate, shorten or paraphrase it.
 
-ServiceNow: extend an existing table (often task) instead of recreating its fields, and never add a field the parent already has. Use the standard fields as they are: name (Name) for the title of reference and config records; short_description (Short description) for the title of every task-type record; description, number, state, active, assigned_to (Assigned to), assignment_group (Assignment group), opened_by, opened_at, priority, impact, urgency, cmdb_ci (Configuration item), work_notes (Work notes), comments (Additional comments), close_notes (Close notes), requested_for (Requested for), caller_id (Caller). Column names are lowercase_with_underscores, labels sentence case, table names singular. In Norwegian, use ServiceNow's official translation: short_description is "Kort beskrivelse", never "Oppsummering".
+ServiceNow: extend an existing table (often task) instead of recreating its fields, and never add a field the parent already has. Use the standard fields as they are: name (Name) for the title of reference and config records; short_description (Short description) for the title of every task-type record; description, number, state, active, assigned_to (Assigned to), assignment_group (Assignment group), opened_by, opened_at, priority, impact, urgency, cmdb_ci (Configuration item), work_notes (Work notes), comments (Additional comments), close_notes (Close notes), requested_for (Requested for), caller_id (Caller). Column names are lowercase_with_underscores, field labels sentence case, table names and labels singular (table labels Title Case like OOB). In Norwegian, use ServiceNow's official translation: short_description is "Kort beskrivelse", never "Oppsummering".
 
 Other platforms work the same way: Jira (Summary, Assignee, Reporter), Salesforce (Name, Subject, Owner), GitHub (Title, Description, Pull request).`
 
@@ -32,7 +32,7 @@ const SN_FIELDS: [RegExp, string][] = [
 ]
 
 const TITLE_CASE_LABELS = [
-  'Short Description', 'Assignment Group', 'Assigned To', 'Configuration Item',
+  'Short Description', 'Assignment Group', 'Assigned To',
   'Opened By', 'Close Notes', 'Work Notes', 'Additional Comments', 'Requested For',
 ]
 
