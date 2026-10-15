@@ -114,7 +114,7 @@ A label is the name of a thing, not a sentence about it.
 
 ## Tables, lists and data
 
-- Column headers are short nouns, with units: "Size (MB)", "Updated".
+- Column headers are short nouns, with units, and repeat the field label exactly: "Size (MB)", "Updated".
 - Counts use digits and the right singular/plural: "1 result", "3 results".
 - Empty cells show "—", not "N/A", "null" or "None".
 - Status labels come from one fixed set of adjectives or past participles: Active, Draft, Archived, Failed.
@@ -155,6 +155,7 @@ Examples of established vocabularies:
 | iOS | Done, Edit, Share, Settings | Finish, Modify, Send to, Preferences |
 | Jira | Summary, Assignee, Reporter, Issue type | Title, Owner, Creator |
 | Salesforce | Account, Contact, Opportunity, Owner | Customer, Person, Deal, Responsible |
+| Dynamics 365 | Name, Owner, Status reason | Title, Responsible, Status detail |
 | GitHub | Pull request, Branch, Merge, Issue | Change request, Version, Combine, Ticket |
 | ServiceNow | Short description, Assignment group, State, Configuration item | Summary, Team, Status, Asset |
 | Finance | Invoice, Due date, Amount, VAT | Bill, Deadline, Sum, Tax amount |
@@ -191,7 +192,10 @@ Names of tables, fields, statuses and roles end up in forms, lists, filters and 
 | Requester | `requested_for` (requests), `caller_id` (incident) | Requested for, Caller |
 
 - Tables: `x_<scope>_<noun>` (scoped) or `u_<noun>` (global), singular. Table labels are Title Case like OOB ("Change Request"); field labels are sentence case.
-- Roles `<scope>.<name>`; system properties `<scope>.<area>.<name>`; script includes PascalCase; business rules and client scripts named for what they do, verb first.
+- Roles `<scope>.<name>`; system properties `<scope>.<area>.<name>`; script includes PascalCase; business rules, client scripts and flows named for what they do, verb first; UI actions named as the button reads ("Resolve").
+- Choice values: lowercase_with_underscores or integers, matching the table's existing list; choice labels sentence case.
+- Catalog: reuse variable sets (for example "Requested for"); items named for what the user gets ("Laptop"); variables lowercase_with_underscores with short questions.
+- "Submit" is fine where ServiceNow uses it (forms, catalog requests).
 - Norwegian: use ServiceNow's official translation (`short_description` is "Kort beskrivelse", never "Oppsummering").
 
 ## Examples
