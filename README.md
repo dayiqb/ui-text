@@ -9,6 +9,7 @@ Markedsplass med to plugins:
 
 - **Legger reglene inn i systemprompten** i hver økt, så Claude skriver riktig fra starten.
 - **Stopper skriving av filer** (Write/Edit i .tsx, .jsx, .ts, .js, .vue, .svelte, .html, .xml, .json, .yaml) som inneholder:
+  - fyllord: "Oops", "Something went wrong", "Click here", "Please enter …"
   - beskrivende etiketter: "Projects I'm working on", "My projects", "View all settings", "Artifacts created"
   - oppfunne ServiceNow-felt: `u_title`, `u_summary`, `u_status`, `u_assigned_user` (og `x_<scope>_`-varianter)
   - Title Case på standardetiketter: "Short Description", "Assignment Group" osv.

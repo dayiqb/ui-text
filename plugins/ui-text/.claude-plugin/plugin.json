@@ -1,6 +1,6 @@
 {
   "name": "ui-text",
   "version": "0.1.0",
-  "description": "Concise, conventional UI text and the platform's standard terms, including ServiceNow fields",
+  "description": "Concise, conventional UI text and the standard terms of each platform and field",
   "author": { "name": "dayiqb" }
 }

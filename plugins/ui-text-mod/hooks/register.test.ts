@@ -42,3 +42,11 @@ test('adds the rules to the system prompt', async ($, on) => {
   const { sections } = await $.prompt.compose({ model: 'm', promptModel: 'm', surfaces: [], tools: [], outputStyle: null, traits: [] })
   expect(sections.map(s => s.id)).toContain('ui-text:rules')
 })
+
+test('blocks UI filler', async ($, on) => {
+  on('tool.call', () => written)
+  const r = await $.tool.call({ tool: 'Write', file_path: '/app/Error.tsx', content: "<p>Oops! Something went wrong.</p><a>Click here</a> placeholder='Please enter your email'" })
+  expect(r.deny).toBeDefined()
+  expect(String(r.deny)).toContain('Click here')
+  expect(String(r.deny)).toContain('Please enter your email')
+})

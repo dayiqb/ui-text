@@ -2,20 +2,18 @@ import type { Register } from 'claude-code'
 
 const RULES = `# UI text
 
-Every label, heading, button, message, table and field you write follows these rules.
+Every label, heading, button, message, table and field you write follows these rules, on any platform.
 
 - Name things, don't describe them. Navigation, tabs, headings and columns are nouns, 1 word where possible, 3 at most: "Projects", not "Projects I'm working on"; "Artifacts", not "Artifacts created".
 - Drop qualifiers the context already gives: my, your, all, created, current, list of, manage, view.
-- Use the word users know from other products: Settings, Search, Home, Profile, Help, Sign in.
-- Buttons are verbs: Save, Create, Delete record. Never "Submit" or "OK" when a specific verb exists. Create = new, Add = attach existing, Remove = detach, Delete = destroy, Close = dismiss.
-- Sentence case ("Assignment group"), no trailing period, no emoji, no exclamation marks, no "please", no marketing tone.
-- Messages: error = what happened + what to do; progress = "Saving…"; success = "Record saved"; confirm = "Delete this record?" with Delete / Cancel.
+- Use the words users know from other products: Home, Search, Settings, Profile, Notifications, Help, Sign in.
+- Buttons are verbs: Save, Create, Delete project. Never "Submit" or "OK" when a specific verb exists. New = start creating, Create = confirm, Add = attach existing, Remove = detach, Delete = destroy, Close = dismiss.
+- Forms: short noun labels ("Email"), units in the label, placeholders are examples, toggles name the setting ("Email notifications").
+- Messages: error = what happened + what to do; progress = "Saving…"; success = "Project saved"; confirm = "Delete project?" with Delete / Cancel; empty = what belongs here + how to start. Never "Oops", "Something went wrong" or "Click here".
+- Follow the platform's casing (usually sentence case), no trailing period, no emoji, no exclamation marks, no "please", no marketing tone.
 - One term per concept, the same everywhere. Never vary words to avoid repetition.
-- The platform's standard term wins over your own wording. Check whether a standard term or field exists before naming anything, and use it exactly. Don't translate, shorten or paraphrase it.
-
-ServiceNow: extend an existing table (often task) instead of recreating its fields, and never add a field the parent already has. Use the standard fields as they are: name (Name) for the title of reference and config records; short_description (Short description) for the title of every task-type record; description, number, state, active, assigned_to (Assigned to), assignment_group (Assignment group), opened_by, opened_at, priority, impact, urgency, cmdb_ci (Configuration item), work_notes (Work notes), comments (Additional comments), close_notes (Close notes), requested_for (Requested for), caller_id (Caller). Column names are lowercase_with_underscores, field labels sentence case, table names and labels singular (table labels Title Case like OOB). In Norwegian, use ServiceNow's official translation: short_description is "Kort beskrivelse", never "Oppsummering".
-
-Other platforms work the same way: Jira (Summary, Assignee, Reporter), Salesforce (Name, Subject, Owner), GitHub (Title, Description, Pull request).`
+- The platform's and the field's established term wins over your own wording. Check whether a standard term or field exists before naming anything, and use it exactly. Don't translate, shorten or paraphrase it.
+- Reuse the platform's built-in objects and fields before creating new ones. Example, ServiceNow: extend task, use name, short_description (Short description), state, assigned_to, assignment_group instead of inventing u_title, u_summary, u_status; Norwegian label for short_description is "Kort beskrivelse".`
 
 // Files whose strings end up in a UI or a schema. Prose files (.md, .txt) are left alone.
 const UI_FILE = /\.(tsx|jsx|ts|js|mjs|vue|svelte|html|xml|json|ya?ml)$/i
@@ -44,6 +42,14 @@ const DESCRIPTIVE = [
   /["'`>]\s*([A-Z][a-z]+s (?:created|you created|I created|I've created))\s*["'`<]/g,
 ]
 
+// Filler that conventional UI text never uses.
+const FILLER: [RegExp, string][] = [
+  [/["'`>]\s*(Oops[!.,]?[^"'`<\n]{0,40})\s*["'`<]/g, 'say what happened and what to do, without "Oops"'],
+  [/["'`>]\s*((?:Click|Tap) here[^"'`<\n]{0,30})\s*["'`<]/g, 'link text names where it goes (e.g. "Billing settings")'],
+  [/["'`>]\s*(Please (?:enter|select|choose|wait|try|fill)[^"'`<\n]{0,30})\s*["'`<]/g, 'drop "please" and start with the verb (e.g. "Enter a valid email address")'],
+  [/["'`>]\s*(Something went wrong[^"'`<\n]{0,30})\s*["'`<]/g, 'say what failed and what to do next'],
+]
+
 export function lint(text: string): Finding[] {
   if (text.includes(IGNORE)) return []
   const findings: Finding[] = []
@@ -61,6 +67,9 @@ export function lint(text: string): Finding[] {
   for (const pattern of DESCRIPTIVE)
     for (const m of text.matchAll(pattern))
       findings.push({ found: m[1], fix: 'name the thing with a noun instead of describing it (e.g. "Projects", not "Projects I\'m working on")' })
+
+  for (const [pattern, fix] of FILLER)
+    for (const m of text.matchAll(pattern)) findings.push({ found: m[1], fix })
 
   return findings
 }
